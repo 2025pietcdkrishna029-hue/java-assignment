@@ -1,0 +1,150 @@
+import java.io.*;
+
+interface Payment
+{
+    void makePayment(double amount);
+    void paymentDetails();
+}
+
+class CreditCardPayment implements Payment
+{
+    String cardNo;
+    String name;
+    double amount;
+
+    CreditCardPayment(String cardNo,String name)
+    {
+        this.cardNo=cardNo;
+        this.name=name;
+    }
+
+    public void makePayment(double amount)
+    {
+        this.amount=amount;
+        System.out.println("Payment Successful");
+    }
+
+    public void paymentDetails()
+    {
+        System.out.println("Payment Mode: Credit Card");
+        System.out.println("Card Number: "+cardNo);
+        System.out.println("Card Holder Name: "+name);
+        System.out.println("Paid Amount: Rs. "+amount);
+    }
+}
+
+class UPIPayment implements Payment
+{
+    String upi;
+    String name;
+    double amount;
+
+    UPIPayment(String upi,String name)
+    {
+        this.upi=upi;
+        this.name=name;
+    }
+
+    public void makePayment(double amount)
+    {
+        this.amount=amount;
+        System.out.println("Payment Successful");
+    }
+
+    public void paymentDetails()
+    {
+        System.out.println("Payment Mode: UPI");
+        System.out.println("UPI ID: "+upi);
+        System.out.println("User Name: "+name);
+        System.out.println("Paid Amount: Rs. "+amount);
+    }
+}
+
+class CashPayment implements Payment
+{
+    String customer;
+    double amount;
+
+    CashPayment(String customer)
+    {
+        this.customer=customer;
+    }
+
+    public void makePayment(double amount)
+    {
+        this.amount=amount;
+        System.out.println("Payment Successful");
+    }
+
+    public void paymentDetails()
+    {
+        System.out.println("Payment Mode: Cash");
+        System.out.println("Customer Name: "+customer);
+        System.out.println("Paid Amount: Rs. "+amount);
+    }
+}
+
+class PaymentApplication
+{
+    public static void main(String args[]) throws IOException
+    {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("----- PAYMENT SYSTEM -----");
+        System.out.println("1. Credit Card");
+        System.out.println("2. UPI");
+        System.out.println("3. Cash");
+        System.out.print("Select Payment Method: ");
+
+        int choice=Integer.parseInt(br.readLine());
+        Payment payment;
+        double amount;
+
+        if(choice==1)
+        {
+            System.out.print("Enter Card Number: ");
+            String card=br.readLine();
+
+            System.out.print("Enter Card Holder Name: ");
+            String name=br.readLine();
+
+            System.out.print("Enter Amount: ");
+            amount=Double.parseDouble(br.readLine());
+
+            payment=new CreditCardPayment(card,name);
+            payment.makePayment(amount);
+            payment.paymentDetails();
+        }
+        else if(choice==2)
+        {
+            System.out.print("Enter UPI ID: ");
+            String upi=br.readLine();
+
+            System.out.print("Enter User Name: ");
+            String name=br.readLine();
+
+            System.out.print("Enter Amount: ");
+            amount=Double.parseDouble(br.readLine());
+
+            payment=new UPIPayment(upi,name);
+            payment.makePayment(amount);
+            payment.paymentDetails();
+        }
+        else if(choice==3)
+        {
+            System.out.print("Enter Customer Name: ");
+            String name=br.readLine();
+
+            System.out.print("Enter Amount: ");
+            amount=Double.parseDouble(br.readLine());
+
+            payment=new CashPayment(name);
+            payment.makePayment(amount);
+            payment.paymentDetails();
+        }
+        else
+        {
+            System.out.println("Invalid Payment Option");
+        }
+    }
+}
