@@ -1,0 +1,65 @@
+class BankAccount
+{
+    int accountNo;
+    String holderName;
+    double balance;
+
+    BankAccount()
+    {
+        accountNo=100;
+        holderName="No Name";
+        balance=0;
+    }
+
+    BankAccount(int no,String name,double amount)
+    {
+        accountNo=no;
+        holderName=name;
+        balance=amount;
+    }
+
+    void deposit(double amount)
+    {
+        balance+=amount;
+        System.out.println("Deposited Amount: "+amount);
+    }
+
+    void withdraw(double amount)
+    {
+        if(amount>balance)
+            System.out.println("Withdrawal Not Possible");
+        else
+        {
+            balance-=amount;
+            System.out.println("Withdrawn Amount: "+amount);
+        }
+    }
+
+    void showAccount()
+    {
+        System.out.println("Account Number: "+accountNo);
+        System.out.println("Account Holder: "+holderName);
+        System.out.println("Current Balance: "+balance);
+    }
+}
+
+class BankAccountDemo
+{
+    public static void main(String args[])
+    {
+        BankAccount account1=new BankAccount();
+        BankAccount account2=new BankAccount(202,"Aman",30000);
+
+        System.out.println("Account Created Using Default Constructor");
+        account1.showAccount();
+
+        System.out.println("\nAccount Created Using Parameterized Constructor");
+        account2.showAccount();
+
+        account2.deposit(4000);
+        account2.withdraw(2500);
+
+        System.out.println("\nFinal Account Details");
+        account2.showAccount();
+    }
+}
