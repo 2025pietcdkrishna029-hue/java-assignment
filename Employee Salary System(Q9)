@@ -1,0 +1,73 @@
+abstract class Employee
+{
+    int id;
+    String name;
+    double salary;
+
+    Employee(int id,String name,double salary)
+    {
+        this.id=id;
+        this.name=name;
+        this.salary=salary;
+    }
+
+    abstract double calculateSalary();
+
+    void displayEmployee()
+    {
+        System.out.println("Employee ID: "+id);
+        System.out.println("Employee Name: "+name);
+        System.out.println("Basic Salary: "+salary);
+        System.out.println("Net Salary: "+calculateSalary());
+    }
+}
+
+class PermanentEmployee extends Employee
+{
+    PermanentEmployee(int id,String name,double salary)
+    {
+        super(id,name,salary);
+    }
+
+    double calculateSalary()
+    {
+        double hra=salary*20/100;
+        double da=salary*40/100;
+        double pf=salary*12/100;
+
+        double gross=salary+hra+da;
+
+        return gross-pf;
+    }
+}
+
+class ContractEmployee extends Employee
+{
+    ContractEmployee(int id,String name,double salary)
+    {
+        super(id,name,salary);
+    }
+
+    double calculateSalary()
+    {
+        double allowance=salary*10/100;
+
+        return salary+allowance;
+    }
+}
+
+class SalarySystem
+{
+    public static void main(String args[])
+    {
+        Employee employee;
+
+        employee=new PermanentEmployee(501,"Rohit",35000);
+        employee.displayEmployee();
+
+        System.out.println();
+
+        employee=new ContractEmployee(502,"Karan",28000);
+        employee.displayEmployee();
+    }
+}
