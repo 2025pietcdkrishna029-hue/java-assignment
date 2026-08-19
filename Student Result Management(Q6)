@@ -1,0 +1,82 @@
+import java.io.*;
+
+class Student
+{
+    int rollNo;
+    String studentName;
+    double marks1,marks2,marks3;
+
+    void getDetails() throws IOException
+    {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.print("Enter Student Roll Number: ");
+        rollNo=Integer.parseInt(br.readLine());
+
+        System.out.print("Enter Student Name: ");
+        studentName=br.readLine();
+
+        System.out.print("Enter Marks in Subject 1: ");
+        marks1=Double.parseDouble(br.readLine());
+
+        System.out.print("Enter Marks in Subject 2: ");
+        marks2=Double.parseDouble(br.readLine());
+
+        System.out.print("Enter Marks in Subject 3: ");
+        marks3=Double.parseDouble(br.readLine());
+    }
+
+    double getTotal()
+    {
+        return marks1+marks2+marks3;
+    }
+
+    double getPercentage()
+    {
+        return getTotal()/3;
+    }
+
+    void showResult()
+    {
+        double percentage=getPercentage();
+
+        System.out.println("Roll Number: "+rollNo);
+        System.out.println("Student Name: "+studentName);
+        System.out.println("Total Marks: "+getTotal());
+        System.out.println("Percentage: "+percentage+"%");
+
+        if(percentage>=90)
+            System.out.println("Grade: A+");
+        else if(percentage>=80)
+            System.out.println("Grade: A");
+        else if(percentage>=70)
+            System.out.println("Grade: B");
+        else if(percentage>=60)
+            System.out.println("Grade: C");
+        else if(percentage>=50)
+            System.out.println("Grade: D");
+        else
+            System.out.println("Grade: F");
+    }
+}
+
+class ResultManagement
+{
+    public static void main(String args[]) throws IOException
+    {
+        Student student1=new Student();
+        Student student2=new Student();
+
+        System.out.println("Enter First Student Details");
+        student1.getDetails();
+
+        System.out.println("\nEnter Second Student Details");
+        student2.getDetails();
+
+        System.out.println("\nResult of First Student");
+        student1.showResult();
+
+        System.out.println("\nResult of Second Student");
+        student2.showResult();
+    }
+}
